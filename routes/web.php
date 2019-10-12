@@ -11,10 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'HomeController@index');
+
+Route::get('/contact',function(){
+    return view('page.contact');
 });
 
+Route::get('/about',function(){
+    return view('page.about');
+});
+
+Route::get('/shop',function(){
+    return view('page.shop');
+});
+
+Route::get('/cart',function(){
+    return view('page.cart');
+});
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
