@@ -99,8 +99,7 @@
             </header>
         @yield('content')
         @show
-
-    
+   
     <!-- Footer section -->
 	<section class="footer-section">
             <div class="container">
