@@ -243,8 +243,6 @@
 	</section>
 	<!-- letest product section end -->
 
-
-
 	<!-- Product filter section -->
 	<section class="product-filter-section">
 		<div class="container">
