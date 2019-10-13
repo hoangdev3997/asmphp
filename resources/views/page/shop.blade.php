@@ -68,9 +68,6 @@
                                 </div>
                             </div>
                             @endforeach
-                            
-                               
-
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
