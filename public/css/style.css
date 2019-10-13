@@ -1082,6 +1082,7 @@ ol {
 }
 .product-item .pi-text p{
 	width: 50%;
+	text-align: center;
 }
 /* -----------------------
   Product filter section

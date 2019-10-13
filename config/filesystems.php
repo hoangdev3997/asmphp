@@ -51,7 +51,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/laravel/asmphp/storage/app/public/',
+            'url' => env('APP_URL').'/asmphp/asmphp/storage/app/public/',
             'visibility' => 'public',
         ],
 

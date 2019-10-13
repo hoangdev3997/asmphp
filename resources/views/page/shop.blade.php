@@ -40,11 +40,42 @@
                     </div>
                     <div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
                         <div class="row">
+
+                            
+                            @foreach ($ctg as $ctg)
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        @if ($ctg->check_new==1)
+                                        <div class="tag-new">New</div>     
+                                        @endif
+                                        @if ($ctg->check_hot==1)
+                                        <div class="tag-hot">Hot</div>     
+                                        @endif
+                                        @if ($ctg->product_sale>0)
+                                        <div class="tag-sale">Sale {{$ctg->product_sale}}%</div>     
+                                        @endif
+                                        <img src="{{ Voyager::image( json_decode($ctg->img)[0] ) }}" alt="">
+                                        <div class="pi-links">
+                                            <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
+                                            <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
+                                        </div>
+                                    </div>
+                                    <div class="pi-text">
+                                        <h6>${{$ctg->product_price}}</h6>
+                                        <p>{{$ctg->product_name}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                            
+                               
+
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
                                         <div class="tag-sale">ON SALE</div>
-                                        <img src="./img/product/6.jpg" alt="">
+                                        <img src="{{asset('')}}img/product/6.jpg" alt="">
                                         <div class="pi-links">
                                             <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
                                             <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
@@ -59,7 +90,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="./img/product/7.jpg" alt="">
+                                        <img src="{{asset('')}}img/product/7.jpg" alt="">
                                         <div class="pi-links">
                                             <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
                                             <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
@@ -74,7 +105,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="./img/product/8.jpg" alt="">
+                                        <img src="{{asset('')}}img/product/8.jpg" alt="">
                                         <div class="pi-links">
                                             <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
                                             <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
@@ -89,7 +120,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="./img/product/10.jpg" alt="">
+                                        <img src="{{asset('')}}img/product/10.jpg" alt="">
                                         <div class="pi-links">
                                             <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
                                             <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
@@ -104,7 +135,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="./img/product/11.jpg" alt="">
+                                        <img src="{{asset('')}}img/product/11.jpg" alt="">
                                         <div class="pi-links">
                                             <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
                                             <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
@@ -119,7 +150,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="./img/product/12.jpg" alt="">
+                                        <img src="{{asset('')}}img/product/12.jpg" alt="">
                                         <div class="pi-links">
                                             <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
                                             <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
@@ -134,7 +165,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="./img/product/5.jpg" alt="">
+                                        <img src="{{asset('')}}img/product/5.jpg" alt="">
                                         <div class="pi-links">
                                             <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
                                             <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
@@ -149,7 +180,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="./img/product/9.jpg" alt="">
+                                        <img src="{{asset('')}}img/product/9.jpg" alt="">
                                         <div class="pi-links">
                                             <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
                                             <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
@@ -164,7 +195,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="./img/product/1.jpg" alt="">
+                                        <img src="{{asset('')}}img/product/1.jpg" alt="">
                                         <div class="pi-links">
                                             <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
                                             <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
@@ -180,7 +211,7 @@
                                 <div class="product-item">
                                     <div class="pi-pic">
                                         <div class="tag-new">new</div>
-                                        <img src="./img/product/2.jpg" alt="">
+                                        <img src="{{asset('')}}img/product/2.jpg" alt="">
                                         <div class="pi-links">
                                             <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
                                             <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
@@ -195,7 +226,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="./img/product/3.jpg" alt="">
+                                        <img src="{{asset('')}}img/product/3.jpg" alt="">
                                         <div class="pi-links">
                                             <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
                                             <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
@@ -210,7 +241,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="./img/product/4.jpg" alt="">
+                                        <img src="{{asset('')}}img/product/4.jpg" alt="">
                                         <div class="pi-links">
                                             <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
                                             <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>

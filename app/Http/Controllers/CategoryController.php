@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Product;
+
 class CategoryController extends Controller
 {
     /**
@@ -13,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('index');
+        return view('page.shop');
         //
 
     }
@@ -45,9 +47,12 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($category_id)
     {
-        //
+        $ctg = Product::where('product_type_id', $category_id)
+               ->orderBy('product_id', 'desc')
+               ->get();
+        return view('page.shop',compact(['ctg']));
     }
 
     /**
