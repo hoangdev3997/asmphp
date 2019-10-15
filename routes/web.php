@@ -22,14 +22,13 @@ Route::get('/about',function(){
 });
 
 Route::get('/shop','CategoryController@index');
-
 Route::get('/shop/{category_id}','CategoryController@show');
 
 Route::get('/cart',function(){
     return view('page.cart');
 });
 
-Route::get('/shop/product/{{product_id}}','ProductController@index');
+Route::get('/shop/product/{product_id}','ProductController@show');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

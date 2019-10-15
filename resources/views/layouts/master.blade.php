@@ -20,13 +20,16 @@
 
 
 	<!-- Stylesheets -->
-<link rel="stylesheet" href="{{asset('')}}css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{asset('')}}css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="{{asset('')}}css/font-awesome.min.css"/>
 	<link rel="stylesheet" href="{{asset('')}}css/slicknav.min.css"/>
 	<link rel="stylesheet" href="{{asset('')}}css/jquery-ui.min.css"/>
 	<link rel="stylesheet" href="{{asset('')}}css/owl.carousel.min.css"/>
 	<link rel="stylesheet" href="{{asset('')}}css/animate.css"/>
-	<link rel="stylesheet" href="{{asset('')}}css/style.css"/>
+    <link rel="stylesheet" href="{{asset('')}}css/style.css"/>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
 </head>
 <body>
         <header class="header-section">

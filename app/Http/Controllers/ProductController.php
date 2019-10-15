@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
+use App\Product;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -43,9 +46,17 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($product_id)
     {
         //
+        $prd_by_id = Product::where('product_id', $product_id)
+               ->get();
+
+        $new_prd_page = Product::select('*')
+        ->orderBy(DB::raw('RAND()'))
+        ->limit(5)
+        ->get();
+        return view('page.product',compact(['prd_by_id','new_prd_page']));
     }
 
     /**

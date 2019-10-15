@@ -266,55 +266,55 @@ $(window).on('load', function() {
 })(jQuery);
 
 
-document.addEventListener("DOMContentLoaded",function(){
-	//Code
-	//Khai báo biến
-	var nut = document.getElementsByClassName('click-on');
-	var noidung = document.getElementsByClassName('dehienthi');
+// document.addEventListener("DOMContentLoaded",function(){
+// 	//Code
+// 	//Khai báo biến
+// 	var nut = document.getElementsByClassName('click-on');
+// 	var noidung = document.getElementsByClassName('dehienthi');
 
-	var phantuload = document.querySelector('.ptload');
-	var trangthaiload = 'chuahienthi';
-	var vitriload = phantuload.offsetTop - 500;
+// 	var phantuload = document.querySelector('.ptload');
+// 	var trangthaiload = 'chuahienthi';
+// 	var vitriload = phantuload.offsetTop - 500;
 	
 
-	for (var i = 0; i < nut.length; i++) {
-		nut[i].onclick = function(){
-				//bỏ class trắng ở những thẻ class trùng tên khác để không trùng hiệu ứng
-				for (var j = 0; j < nut.length; j++) {
-					nut[j].classList.remove('selected');
-				}
-				//Sau đó mới add class trắng vào button vừa được click
-				this.classList.add('selected');
+// 	for (var i = 0; i < nut.length; i++) {
+// 		nut[i].onclick = function(){
+// 				//bỏ class trắng ở những thẻ class trùng tên khác để không trùng hiệu ứng
+// 				for (var j = 0; j < nut.length; j++) {
+// 					nut[j].classList.remove('selected');
+// 				}
+// 				//Sau đó mới add class trắng vào button vừa được click
+// 				this.classList.add('selected');
 
-				//Lấy về data-hienlen theo từng mục tương ứng
-				//console.log(this.getAttribute('data-hienlen'));
-				var ndhienra = this.getAttribute('data-hienlen');	
-				var phan_tu_hien_ra = document.getElementById(ndhienra);
-				//để không có các phần tử khác hiện cùng lúc	
-				for (var i = 0; i < noidung.length; i++) {
-					noidung[i].classList.remove('hienra');
-					}
-				//Hiển thị nội dung con của div được click
-				phan_tu_hien_ra.classList.add('hienra');
+// 				//Lấy về data-hienlen theo từng mục tương ứng
+// 				//console.log(this.getAttribute('data-hienlen'));
+// 				var ndhienra = this.getAttribute('data-hienlen');	
+// 				var phan_tu_hien_ra = document.getElementById(ndhienra);
+// 				//để không có các phần tử khác hiện cùng lúc	
+// 				for (var i = 0; i < noidung.length; i++) {
+// 					noidung[i].classList.remove('hienra');
+// 					}
+// 				//Hiển thị nội dung con của div được click
+// 				phan_tu_hien_ra.classList.add('hienra');
 			
 			
-		}
-	}
+// 		}
+// 	}
 
 
-	//Hiệu ứng load bằng javascript
-	window.addEventListener('scroll',function(){	
-		//Xử lí phần từ load
-		if (window.pageYOffset > vitriload) {
-			if (trangthaiload == 'chuahienthi') {
-				trangthaiload = 'danghienthi';
-				document.querySelector('.ptload').classList.add("pt-loaded");
-			}
-		}
-	});
+// 	//Hiệu ứng load bằng javascript
+// 	window.addEventListener('scroll',function(){	
+// 		//Xử lí phần từ load
+// 		if (window.pageYOffset > vitriload) {
+// 			if (trangthaiload == 'chuahienthi') {
+// 				trangthaiload = 'danghienthi';
+// 				document.querySelector('.ptload').classList.add("pt-loaded");
+// 			}
+// 		}
+// 	});
 		
 		
-},false);
+// },false);
 
 
 

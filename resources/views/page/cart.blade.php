@@ -3,7 +3,7 @@
 @section('title','Cart')  
 
 @section('content')
-
+@csrf
 	<!-- Page info -->
 	<div class="page-top-info">
             <div class="container">

@@ -1772,7 +1772,7 @@ ol {
 
 .product-thumbs .pt:last-child {
 	margin-right: 0;
-	height: 100%;
+	/* height: 100%; */
 }
 
 .product-thumbs .pt.active:after {

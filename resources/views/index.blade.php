@@ -4,6 +4,8 @@
 @section('title','Home')  
 
 @section('content')
+
+@csrf
    <!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -172,74 +174,38 @@
 				<h2>LATEST PRODUCTS</h2>
 			</div>
 			<div class="product-slider owl-carousel">
-				<div class="product-item">
-					<div class="pi-pic">
-						<img src="{{asset('')}}img/product/1.jpg" alt="">
-						<div class="pi-links">
-							<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-							<a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
-						</div>
-					</div>
-					<div class="pi-text">
-						<h6>$35,00</h6>
-						<p>Flamboyant Pink Top </p>
-					</div>
-				</div>
-				<div class="product-item">
-					<div class="pi-pic">
-						<div class="tag-new">New</div>
-						<img src="{{asset('')}}img/product/2.jpg" alt="">
-						<div class="pi-links">
-							<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-							<a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
-						</div>
-					</div>
-					<div class="pi-text">
-						<h6>$35,00</h6>
-						<p>Black and White Stripes Dress</p>
-					</div>
-				</div>
-				<div class="product-item">
-					<div class="pi-pic">
-						<img src="{{asset('')}}img/product/3.jpg" alt="">
-						<div class="pi-links">
-							<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-							<a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
-						</div>
-					</div>
-					<div class="pi-text">
-						<h6>$35,00</h6>
-						<p>Flamboyant Pink Top </p>
-					</div>
-				</div>
-				<div class="product-item">
+					@foreach ($new_prd as $new_prd)
+					<div class="product-item">
 						<div class="pi-pic">
-							<img src="{{asset('')}}img/product/4.jpg" alt="">
+							@if ($new_prd->amount>0)
+								@if ($new_prd->check_new==1)
+									<div class="tag-new">New</div>     
+								@endif
+
+								@if ($new_prd->check_hot==1)
+									<div class="tag-hot">Hot</div>     
+								@endif
+
+								@if ($new_prd->product_sale>0)
+									<div class="tag-sale">Sale {{$new_prd->product_sale}}%</div>     
+								@endif
+							@else
+								<div class="tag-sale">OUT STOCK</div>
+							@endif
+							
+							<img src="{{ Voyager::image( json_decode($new_prd->img)[0] ) }}" alt="">
 							<div class="pi-links">
 								<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
+								<a href="/shop/product/{{$new_prd->product_id}}" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
 							</div>
 						</div>
 						<div class="pi-text">
-							<h6>$35,00</h6>
-							<p>Flamboyant Pink Top </p>
+							<h6>${{$new_prd->product_price}}</h6>
+							<p>{{$new_prd->product_name}}</p>
 						</div>
 					</div>
-				<div class="product-item">
-						<div class="pi-pic">
-							<img src="{{asset('')}}img/product/6.jpg" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
-							</div>
-						</div>
-						<div class="pi-text">
-							<h6>$35,00</h6>
-							<p>Flamboyant Pink Top </p>
-						</div>
-					</div>
-			</div>
-		</div>
+					@endforeach       
+				</div>
 	</section>
 	<!-- letest product section end -->
 
@@ -250,113 +216,41 @@
 				<h2>BROWSE TOP SELLING PRODUCTS</h2>
 			</div>
 			<div class="row " id="top">
-				<div class="col-lg-3 col-sm-6">
-					<div class="product-item">
-						<div class="pi-pic">
-							<img src="{{asset('')}}img/product/5.jpg" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span><span>VIEW MORE</span></a>
+					@foreach ($top_prd as $top_prd)
+					<div class="col-lg-3 col-sm-6">
+						<div class="product-item">
+							<div class="pi-pic">
+								@if ($top_prd->amount>0)
+									@if ($top_prd->check_new==1)
+										<div class="tag-new">New</div>     
+									@endif
+
+									@if ($top_prd->check_hot==1)
+										<div class="tag-hot">Hot</div>     
+									@endif
+
+									@if ($top_prd->product_sale>0)
+										<div class="tag-sale">Sale {{$top_prd->product_sale}}%</div>     
+									@endif
+								@else
+									<div class="tag-sale">OUT STOCK</div>
+								@endif
+								
+								<img src="{{ Voyager::image( json_decode($top_prd->img)[0] ) }}" alt="">
+								<div class="pi-links">
+									<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
+									<a href="/shop/product/{{$top_prd->product_id}}" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
+								</div>
+							</div>
+							<div class="pi-text">
+								<h6>${{$top_prd->product_price}}</h6>
+								<p>{{$top_prd->product_name}}</p>
 							</div>
 						</div>
-						<div class="pi-text">
-							<h6>$35,00</h6>
-							<p>Flamboyant Pink Top </p>
-						</div>
 					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="product-item">
-						<div class="pi-pic">
-							<div class="tag-sale">ON SALE</div>
-							<img src="{{asset('')}}img/product/6.jpg" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span><span>VIEW MORE</span></a>
-							</div>
-						</div>
-						<div class="pi-text">
-							<h6>$35,00</h6>
-							<p>Black and White Stripes Dress</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="product-item">
-						<div class="pi-pic">
-							<img src="{{asset('')}}img/product/7.jpg" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span><span>VIEW MORE</span></a>
-							</div>
-						</div>
-						<div class="pi-text">
-							<h6>$35,00</h6>
-							<p>Flamboyant Pink Top </p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="product-item">
-						<div class="pi-pic">
-							<img src="{{asset('')}}img/product/8.jpg" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span><span>VIEW MORE</span></a>
-							</div>
-						</div>
-						<div class="pi-text">
-							<h6>$35,00</h6>
-							<p>Flamboyant Pink Top </p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="product-item">
-						<div class="pi-pic">
-							<img src="{{asset('')}}img/product/9.jpg" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
-							</div>
-						</div>
-						<div class="pi-text">
-							<h6>$35,00</h6>
-							<p>Flamboyant Pink Top </p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="product-item">
-						<div class="pi-pic">
-							<img src="{{asset('')}}img/product/10.jpg" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
-							</div>
-						</div>
-						<div class="pi-text">
-							<h6>$35,00</h6>
-							<p>Black and White Stripes Dress</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="product-item">
-						<div class="pi-pic">
-							<img src="{{asset('')}}img/product/11.jpg" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
-							</div>
-						</div>
-						<div class="pi-text">
-							<h6>$35,00</h6>
-							<p>Flamboyant Pink Top </p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
+					@endforeach
+
+				{{-- <div class="col-lg-3 col-sm-6">
 					<div class="product-item">
 						<div class="pi-pic">
 							<img src="{{asset('')}}img/product/12.jpg" alt="">
@@ -370,7 +264,7 @@
 							<p>Flamboyant Pink Top </p>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 			</div>
 
 			<div class="text-center pt-5">

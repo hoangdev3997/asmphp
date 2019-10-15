@@ -3,74 +3,68 @@
 @section('title','Product')  
 
 @section('content')
-
+@csrf
 
 	<!-- product section -->
 	<section class="product-section">
             <div class="container">
                 <div class="back-link">
-                    <a href="./category.html"> &lt;&lt; Back to Category</a>
+                    <a href="/shop"> &lt;&lt; Back to Shop Page</a>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="product-pic-zoom">
-                            <img class="product-big-img" src="img/single-product/1.jpg" alt="">
-                        </div>
-                        <div class="product-thumbs" tabindex="1" style="overflow: hidden; outline: none;">
-                            <div class="product-thumbs-track">
-                                <div class="pt active" data-imgbigurl="img/single-product/1.jpg"><img src="img/single-product/thumb-1.jpg" alt=""></div>
-                                <div class="pt" data-imgbigurl="img/single-product/2.jpg"><img src="img/single-product/thumb-2.jpg" alt=""></div>
-                                <div class="pt" data-imgbigurl="img/single-product/3.jpg"><img src="img/single-product/thumb-3.jpg" alt=""></div>
-                                <div class="pt" data-imgbigurl="img/single-product/4.jpg"><img src="img/single-product/thumb-4.jpg" alt=""></div>
+                    @foreach ($prd_by_id as $prd_by_id)
+                        <div class="col-lg-6">   
+                            <div class="product-pic-zoom">
+                                <img class="product-big-img" src="{{ Voyager::image( json_decode($prd_by_id->img)[0] ) }}" alt="">
                             </div>
-                        </div>
-                    </div>
+                            <div class="product-thumbs" tabindex="1" style="overflow: hidden; outline: none;">
+                                <div class="product-thumbs-track">
+                                        @for ($i = 0; $i < count(json_decode($prd_by_id->img)); $i++)
+                                            @if ($i==0)
+                                                <div class="pt active" data-imgbigurl="{{ Voyager::image( json_decode($prd_by_id->img)[$i] ) }}">
+                                                    <img src="{{ Voyager::image( json_decode($prd_by_id->img)[$i] ) }}" alt="">
+                                                </div>
+                                                
+                                            @else
+                                            <div class="pt" data-imgbigurl="{{ Voyager::image( json_decode($prd_by_id->img)[$i] ) }}"><img src="{{ Voyager::image( json_decode($prd_by_id->img)[$i] ) }}" alt=""></div>
+                                            @endif
+                                                
+                                        @endfor
+                                </div>
+                            </div>
+                        </div> 
+                    @endforeach
+                    
                     <div class="col-lg-6 product-details">
-                        <h2 class="p-title">White peplum top</h2>
-                        <h3 class="p-price">$39.90</h3>
+                        <h2 class="p-title">{{$prd_by_id->product_name}}</h2>
+                        <h3 class="p-price">
+                            <span class="f-price">${{ $prd_by_id->product_price - $prd_by_id->product_sale*$prd_by_id->product_price/100 }} </span> 
+                            <span class="s-price">${{ $prd_by_id->product_price }} </span>
+                        </h3>
+
+                        @if ($prd_by_id->amount > 0)
                         <h4 class="p-stock">Available: <span>In Stock</span></h4>
-                        <div class="p-rating">
+                        @else
+                        <h4 class="p-stock">Available: <span>Out Stock</span></h4>
+                        @endif
+                        
+                        {{-- <div class="p-rating">
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o fa-fade"></i>
-                        </div>
+                        </div> --}}
+
                         <div class="p-review">
-                            <a href="">3 reviews</a>|<a href="">Add your review</a>
+                            <a href="">3 reviews</a>
                         </div>
-                        <div class="fw-size-choose">
-                            <p>Size</p>
-                            <div class="sc-item">
-                                <input type="radio" name="sc" id="xs-size">
-                                <label for="xs-size">32</label>
-                            </div>
-                            <div class="sc-item">
-                                <input type="radio" name="sc" id="s-size">
-                                <label for="s-size">34</label>
-                            </div>
-                            <div class="sc-item">
-                                <input type="radio" name="sc" id="m-size" checked="">
-                                <label for="m-size">36</label>
-                            </div>
-                            <div class="sc-item">
-                                <input type="radio" name="sc" id="l-size">
-                                <label for="l-size">38</label>
-                            </div>
-                            <div class="sc-item disable">
-                                <input type="radio" name="sc" id="xl-size" disabled>
-                                <label for="xl-size">40</label>
-                            </div>
-                            <div class="sc-item">
-                                <input type="radio" name="sc" id="xxl-size">
-                                <label for="xxl-size">42</label>
-                            </div>
-                        </div>
+
                         <div class="quantity">
                             <p>Quantity</p>
                             <div class="pro-qty"><input type="text" value="1"></div>
                         </div>
-                        <a href="#" class="site-btn">SHOP NOW</a>
+                        <a href="#" class="site-btn">BUY NOW</a>
                         <div id="accordion" class="accordion-area">
                             <div class="panel">
                                 <div class="panel-header" id="headingOne">
@@ -78,24 +72,11 @@
                                 </div>
                                 <div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="panel-body">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so dales. Phasellus sagittis auctor gravida. Integer bibendum sodales arcu id te mpus. Ut consectetur lacus leo, non scelerisque nulla euismod nec.</p>
-                                        <p>Approx length 66cm/26" (Based on a UK size 8 sample)</p>
-                                        <p>Mixed fibres</p>
-                                        <p>The Model wears a UK size 8/ EU size 36/ US size 4 and her height is 5'8"</p>
+                                        <p>{{$prd_by_id->full_detail}}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="panel">
-                                <div class="panel-header" id="headingTwo">
-                                    <button class="panel-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">care details </button>
-                                </div>
-                                <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                    <div class="panel-body">
-                                        <img src="./img/cards.png" alt="">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so dales. Phasellus sagittis auctor gravida. Integer bibendum sodales arcu id te mpus. Ut consectetur lacus leo, non scelerisque nulla euismod nec.</p>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div class="panel">
                                 <div class="panel-header" id="headingThree">
                                     <button class="panel-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">shipping & Returns</button>
@@ -104,17 +85,17 @@
                                     <div class="panel-body">
                                         <h4>7 Days Returns</h4>
                                         <p>Cash on Delivery Available<br>Home Delivery <span>3 - 4 days</span></p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so dales. Phasellus sagittis auctor gravida. Integer bibendum sodales arcu id te mpus. Ut consectetur lacus leo, non scelerisque nulla euismod nec.</p>
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="social-sharing">
-                            <a href=""><i class="fa fa-google-plus"></i></a>
-                            <a href=""><i class="fa fa-pinterest"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-youtube"></i></a>
+                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-youtube"></i></a>
                         </div>
                     </div>
                 </div>
@@ -128,71 +109,44 @@
                 <div class="section-title text-uppercase">
                     <h2>Continue Shopping</h2>
                 </div>
-                <div class="row">
-                    <div class="col-lg-3 col-sm-6">
+                <div class="row">       
+                    <div class="product-slider owl-carousel">
+                        @foreach ($new_prd_page as $new_prd_page)
                         <div class="product-item">
                             <div class="pi-pic">
-                                <div class="tag-new">New</div>
-                                <img src="./img/product/2.jpg" alt="">
+                                @if ($new_prd_page->amount>0)
+                                    @if ($new_prd_page->check_new==1)
+                                        <div class="tag-new">New</div>     
+                                    @endif
+
+                                    @if ($new_prd_page->check_hot==1)
+                                        <div class="tag-hot">Hot</div>     
+                                    @endif
+
+                                    @if ($new_prd_page->product_sale>0)
+                                        <div class="tag-sale">Sale {{$new_prd_page->product_sale}}%</div>     
+                                    @endif
+                                @else
+                                    <div class="tag-sale">OUT STOCK</div>
+                                @endif
+                                
+                                <img src="{{ Voyager::image( json_decode($new_prd_page->img)[0] ) }}" alt="">
                                 <div class="pi-links">
                                     <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
+                                    <a href="/shop/product/{{$new_prd_page->product_id}}" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
                                 </div>
                             </div>
                             <div class="pi-text">
-                                <h6>$35,00</h6>
-                                <p>Black and White Stripes Dress</p>
+                                <h6>${{$new_prd_page->product_price}}</h6>
+                                <p>{{$new_prd_page->product_name}}</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="./img/product/5.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>$35,00</h6>
-                                <p>Flamboyant Pink Top </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="./img/product/9.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>$35,00</h6>
-                                <p>Flamboyant Pink Top </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="./img/product/1.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>$35,00</h6>
-                                <p>Flamboyant Pink Top </p>
-                            </div>
-                        </div>
+                        @endforeach       
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
         <!-- Related product section end -->
     
         @endsection

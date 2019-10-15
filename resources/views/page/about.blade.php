@@ -3,6 +3,8 @@
 @section('title','About')  
 
 @section('content')
+@csrf
+
 <!-- Related product section -->
 <section class="related-product-section">
         <div class="container">

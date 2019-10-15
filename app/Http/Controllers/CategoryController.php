@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
+use Illuminate\Support\Facades\DB;
+
 
 class CategoryController extends Controller
 {
@@ -15,11 +17,17 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('page.shop');
+        
+        $ctg = Product::select('*')
+               ->orderBy('product_id', 'desc')
+               ->limit(9)
+               ->get();
+        return view('page.shop',compact(['ctg']));
         //
 
     }
 
+    
     /**
      * Show the form for creating a new resource.
      *
