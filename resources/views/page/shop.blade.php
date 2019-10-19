@@ -14,7 +14,7 @@
                             <h2 class="fw-title">Categories</h2>
                             <ul class="category-menu">
                                 @foreach (App\Category::all() as $category)
-                                <li><a href="/shop/{{ $category->product_type_id }}">{{ $category->product_type_name }}</a></li>
+                                <li><a href="/shop/{{ $category->product_type_id }}/{{Str::slug($category->product_type_name)}}">{{ $category->product_type_name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -65,7 +65,7 @@
                                         <img src="{{ Voyager::image( json_decode($ctg->img)[0] ) }}" alt="">
                                         <div class="pi-links">
                                             <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-                                            <a href="/shop/product/{{$ctg->product_id}}" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
+                                            <a href="/product/{{$ctg->product_id}}/{{Str::slug($ctg->product_name)}}" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
                                         </div>
                                     </div>
                                     <div class="pi-text">

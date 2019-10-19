@@ -22,14 +22,18 @@ Route::get('/about',function(){
 });
 
 Route::get('/shop','CategoryController@index');
-Route::get('/shop/{category_id}','CategoryController@show');
+Route::get('/shop/{category_id}/{category_name}','CategoryController@show');
 
 Route::get('/cart',function(){
     return view('page.cart');
 });
 
-Route::get('/shop/product/{product_id}','ProductController@show');
+Route::get('/product/{product_id}/{product_name}','ProductController@show');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

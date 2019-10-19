@@ -7,7 +7,7 @@ $(window).on('load', function() {
 		Preloder
 	--------------------*/
 	$(".loader").fadeOut();
-	$("#preloder").delay(100).fadeOut("slow");
+	$("#preloder").delay(10).fadeOut("slow");
 
 });
 
@@ -264,7 +264,6 @@ $(window).on('load', function() {
        	});
 
 })(jQuery);
-
 
 // document.addEventListener("DOMContentLoaded",function(){
 // 	//Code

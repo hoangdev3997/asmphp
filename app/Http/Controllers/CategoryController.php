@@ -55,7 +55,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($category_id)
+    public function show($category_id,$category_name)
     {
         $ctg = Product::where('product_type_id', $category_id)
                ->orderBy('product_id', 'desc')

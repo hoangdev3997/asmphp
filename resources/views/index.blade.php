@@ -196,7 +196,7 @@
 							<img src="{{ Voyager::image( json_decode($new_prd->img)[0] ) }}" alt="">
 							<div class="pi-links">
 								<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-								<a href="/shop/product/{{$new_prd->product_id}}" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
+								<a href="/product/{{$new_prd->product_id}}/{{Str::slug($new_prd->product_name)}}" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
 							</div>
 						</div>
 						<div class="pi-text">
@@ -239,7 +239,7 @@
 								<img src="{{ Voyager::image( json_decode($top_prd->img)[0] ) }}" alt="">
 								<div class="pi-links">
 									<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-									<a href="/shop/product/{{$top_prd->product_id}}" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
+									<a href="/product/{{$top_prd->product_id}}/{{Str::slug($top_prd->product_name)}}" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
 								</div>
 							</div>
 							<div class="pi-text">

@@ -51,10 +51,37 @@
                             </div>
                             <div class="col-xl-4 col-lg-5 d-flex justify-content-end">
                                 <div class="user-panel">
+                                    @guest
                                     <div class="up-item">
                                         <i class="far fa-user"></i>
-                                        <span class="hidden-span"><a href="/page/login">Sign In</a> or <a href="/page/register">Create Account</a></span>
+                                        <span class="hidden-span"><a href="{{ route('login') }}">Sign In</a> or <a href="{{ route('register') }}">Create Account</a></span>
                                     </div>
+                                     @else
+                                        
+                                        <div class="up-item-login">
+                                            <ul class="main-menu">
+                                                <li>
+                                                    <i class="far fa-user"></i><a href="#"> {{ Auth::user()->name }} </a>
+                                                        <ul class="sub-menu">
+                                                            {{-- <li><a href="#"><i class="fas fa-user-edit"></i>Edit Profile</a></li> --}}
+
+                                                            <li><a href="{{ route('logout') }}" 
+                                                            onclick="event.preventDefault();
+                                                                document.getElementById('logout-form').submit();">
+                                                                <i class="fas fa-sign-out-alt"></i>Logout
+                                                            </a>
+                                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                                @csrf
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    @endguest
+
+                                        {{-- <span class="hidden-span"><a href="{{ route('login') }}">Sign In</a> or <a href="/page/register">Create Account</a></span> --}}
+                                    
                                     <div class="right-item">
                                         <div class="shopping-card">
                                             <i class="fas fa-shopping-bag"></i>
@@ -89,7 +116,7 @@
                                 <ul class="sub-menu">
                                     
                                         @foreach (App\Category::all() as $category)
-                                        <li><a href="/shop/{{ $category->product_type_id }}">{{ $category->product_type_name }}</a></li>
+                                        <li><a href="/shop/{{ $category->product_type_id }}/{{Str::slug($category->product_type_name)}}">{{ $category->product_type_name }}</a></li>
                                         @endforeach
                                 </ul>
                             </li>
