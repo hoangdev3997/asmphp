@@ -5,7 +5,7 @@
 @section('content')
 @csrf
 	<!-- Page info -->
-	<div class="page-top-info">
+	<div class="page-top-info" style="background-image: url({{asset('')}}img/banner-bg.jpg);">
             <div class="container">
                 <h4>Contact</h4>
                 <div class="site-pagination">

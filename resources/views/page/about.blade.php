@@ -4,7 +4,16 @@
 
 @section('content')
 @csrf
-
+<!-- Page info -->
+<div class="page-top-info" style="background-image: url({{asset('')}}img/banner-bg.jpg);">
+    <div class="container">
+        <h4>About</h4>
+        <div class="site-pagination">
+            <a href="/">Home</a> /
+            <a href="/about">About</a>
+        </div>
+    </div>
+</div>
 <!-- Related product section -->
 <section class="related-product-section">
         <div class="container">

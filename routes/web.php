@@ -37,3 +37,10 @@ Route::group(['prefix' => 'admin'], function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::post('/cart-add', 'CartController@add')->name('cart.add');
+Route::get('/cart-checkout', 'CartController@cart')->name('cart.checkout');
+Route::post('/cart-clear', 'CartController@clear')->name('cart.clear');
+Route::get('/cart-remove/{id}', 'CartController@remove')->name('cart.remove');
+Route::post('/cart-update', 'CartController@update')->name('cart.update');

@@ -64,33 +64,33 @@
                                         
                                         <img src="{{ Voyager::image( json_decode($ctg->img)[0] ) }}" alt="">
                                         <div class="pi-links">
-                                            <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-                                            <a href="/product/{{$ctg->product_id}}/{{Str::slug($ctg->product_name)}}" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
+                                            @php
+                                                $price = $ctg->product_price - $ctg->product_sale*$ctg->product_price/100;
+                                            @endphp
+                                                <form method="POST" action="{{route('cart.add')}}" class="" >
+                                                    @csrf
+                                                    <input name="id" type="hidden" value="{{$ctg->product_id}}">
+                                                    <input name="name" type="hidden" value="{{$ctg->product_name}}">
+                                                    <input name="amount" type="hidden" value="1">
+                                                    <input name="price" type="hidden" value="{{$price}}">
+                                                    <input type="hidden" name="img" value="{{ Voyager::image( json_decode($ctg->img)[0] ) }}">
+                                                    <button type="submit" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></button>
+                                                </form>
+                                
+                                                
+                                                <a href="/product/{{$ctg->product_id}}/{{Str::slug($ctg->product_name)}}" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
+
+
+                                            
                                         </div>
                                     </div>
                                     <div class="pi-text">
-                                        <h6>${{$ctg->product_price}}</h6>
+                                        <h6>${{ $ctg->product_price - $ctg->product_sale*$ctg->product_price/100 }}</h6>
                                         <p>{{$ctg->product_name}}</p>
                                     </div>
                                 </div>
                             </div>
                             @endforeach
-                            {{-- <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <div class="tag-sale">ON SALE</div>
-                                        <img src="{{asset('')}}img/product/6.jpg" alt="">
-                                        <div class="pi-links">
-                                            <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-                                            <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
-                                        </div>
-                                    </div>
-                                    <div class="pi-text">
-                                        <h6>$35,00</h6>
-                                        <p>Black and White Stripes Dress</p>
-                                    </div>
-                                </div>
-                            </div> --}}
                             <div class="text-center w-100 pt-3">
                                     <div id="load_more">
                                         <button type="button" name="load_more_button" class="site-btn sb-line sb-dark" id="load_more_button">Load More</button>

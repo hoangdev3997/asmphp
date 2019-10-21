@@ -5,7 +5,7 @@
 @section('content')
 @csrf
 	<!-- Page info -->
-	<div class="page-top-info">
+<div class="page-top-info" style="background-image: url({{asset('')}}img/banner-bg.jpg);">
             <div class="container">
                 <h4>Your cart</h4>
                 <div class="site-pagination">
@@ -30,70 +30,41 @@
                                     <tr>
                                         <th class="product-th">Product</th>
                                         <th class="quy-th">Quantity</th>
-                                        <th class="size-th">SizeSize</th>
                                         <th class="total-th">Price</th>
+                                        <th class="total-th">Remove</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach(Cart::content() as $item) 
                                     <tr>
                                         <td class="product-col">
-                                            <img src="img/cart/1.jpg" alt="">
+                                            <div class="pc-img">
+                                                    <img src="{{$item->options->img}}" alt="">
+                                            </div>
+                                        
                                             <div class="pc-title">
-                                                <h4>Animal Print Dress</h4>
-                                                <p>$45.90</p>
+                                                <h4>{{$item->name}}</h4>
+                                                <p>${{$item->price}}</p>
                                             </div>
                                         </td>
                                         <td class="quy-col">
                                             <div class="quantity">
                                                 <div class="pro-qty">
-                                                    <input type="text" value="1">
+                                                    <input type="text" value="{{$item->qty}}">
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="size-col"><h4>Size M</h4></td>
-                                        <td class="total-col"><h4>$45.90</h4></td>
+                                        <td class="total-col"><h4>${{$item->qty*$item->price}}</h4></td>
+                                        <td class="remove">
+                                        <a href="/cart-remove/{{$item->rowId}}"><i class="fas fa-trash"></i></a>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td class="product-col">
-                                            <img src="img/cart/2.jpg" alt="">
-                                            <div class="pc-title">
-                                                <h4>Ruffle Pink Top</h4>
-                                                <p>$45.90</p>
-                                            </div>
-                                        </td>
-                                        <td class="quy-col">
-                                            <div class="quantity">
-                                                <div class="pro-qty">
-                                                    <input type="text" value="1">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="size-col"><h4>Size M</h4></td>
-                                        <td class="total-col"><h4>$45.90</h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-col">
-                                            <img src="img/cart/3.jpg" alt="">
-                                            <div class="pc-title">
-                                                <h4>Skinny Jeans</h4>
-                                                <p>$45.90</p>
-                                            </div>
-                                        </td>
-                                        <td class="quy-col">
-                                            <div class="quantity">
-                                                <div class="pro-qty">
-                                                    <input type="text" value="1">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="size-col"><h4>Size M</h4></td>
-                                        <td class="total-col"><h4>$45.90</h4></td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                             </div>
                             <div class="total-cost">
-                                <h6>Total <span>$99.90</span></h6>
+                                <h6>Total <span>${{Cart::total()}}</span></h6>
                             </div>
                         </div>
                     </div>
@@ -111,76 +82,49 @@
         <!-- cart section end -->
     
         <!-- Related product section -->
-        <section class="related-product-section">
+    <section class="related-product-section">
             <div class="container">
                 <div class="section-title text-uppercase">
                     <h2>Continue Shopping</h2>
                 </div>
-                <div class="row">
-                    <div class="col-lg-3 col-sm-6">
+                <div class="row">       
+                    <div class="product-slider owl-carousel">
+                        @foreach ($continue_shopping as $continue_shopping)
                         <div class="product-item">
                             <div class="pi-pic">
-                                <div class="tag-new">New</div>
-                                <img src="./img/product/2.jpg" alt="">
+                                @if ($continue_shopping->amount>0)
+                                    @if ($continue_shopping->check_new==1)
+                                        <div class="tag-new">New</div>     
+                                    @endif
+
+                                    @if ($continue_shopping->check_hot==1)
+                                        <div class="tag-hot">Hot</div>     
+                                    @endif
+
+                                    @if ($continue_shopping->product_sale>0)
+                                        <div class="tag-sale">Sale {{$continue_shopping->product_sale}}%</div>     
+                                    @endif
+                                @else
+                                    <div class="tag-sale">OUT STOCK</div>
+                                @endif
+                                
+                                <img src="{{ Voyager::image( json_decode($continue_shopping->img)[0] ) }}" alt="">
                                 <div class="pi-links">
                                     <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
+                                    <a href="/product/{{$continue_shopping->product_id}}/{{Str::slug($continue_shopping->product_name)}}" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
                                 </div>
                             </div>
                             <div class="pi-text">
-                                <h6>$35,00</h6>
-                                <p>Black and White Stripes Dress</p>
+                                <h6>${{$continue_shopping->product_price}}</h6>
+                                <p>{{$continue_shopping->product_name}}</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="./img/product/5.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>$35,00</h6>
-                                <p>Flamboyant Pink Top </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="./img/product/9.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>$35,00</h6>
-                                <p>Flamboyant Pink Top </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="./img/product/1.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>$35,00</h6>
-                                <p>Flamboyant Pink Top </p>
-                            </div>
-                        </div>
+                        @endforeach       
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
         <!-- Related product section end -->
     
 @endsection

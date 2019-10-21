@@ -59,7 +59,7 @@
                                      @else
                                         
                                         <div class="up-item-login">
-                                            <ul class="main-menu">
+                                            <ul class="menu">
                                                 <li>
                                                     <i class="far fa-user"></i><a href="#"> {{ Auth::user()->name }} </a>
                                                         <ul class="sub-menu">
@@ -85,9 +85,9 @@
                                     <div class="right-item">
                                         <div class="shopping-card">
                                             <i class="fas fa-shopping-bag"></i>
-                                            <span class="amount-icon">0</span>
+                                        <span class="amount-icon">{{ Cart::content()->count() }}</span>
                                         </div>
-                                        <span class="hidden-span"><a href="#">Shopping Cart</a></span>
+                                        <span class="hidden-span"><a href="{{ route('cart.checkout') }}">Shopping Cart</a></span>
                                     </div>
                                 </div>
                             </div>
