@@ -44,35 +44,41 @@
                                 </a>
                             </div>
                             <div class="col-xl-6 col-lg-5">
-                                <form class="header-search-form"  method="post" enctype="multipart/form-data" action="index.php?page=shop">
-                                    <input type="text" name="search-data" placeholder="Search ...">
-                                    <button type="submit" name="search"><i class="fas fa-search"></i></button>
+                            <form class="header-search-form" method="get" action="{{route('search')}}">
+                                    <input type="search" name="search" placeholder="Search ...">
+                                    <button type="submit"><i class="fas fa-search"></i></button>
                                 </form>
                             </div>
                             <div class="col-xl-4 col-lg-5 d-flex justify-content-end">
                                 <div class="user-panel">
                                     @guest
                                     <div class="up-item">
-                                        <i class="far fa-user"></i>
-                                        <span class="hidden-span"><a href="{{ route('login') }}">Sign In</a> or <a href="{{ route('register') }}">Create Account</a></span>
+                                        <ul class="menu">
+                                            <li>
+                                                <i class="far fa-user"></i>
+                                                <ul class="sub-menu">
+                                                    <li><a href="{{ route('login') }}"><i class="fas fa-walking"></i>&nbsp Sign In</a></li>
+                                                    <li><a href="{{ route('register') }}"><i class="fas fa-user-plus"></i> Create Account</a></li>
+                                                </ul>
+                                            </li>       
+                                        </ul>                                        
                                     </div>
                                      @else
-                                        
                                         <div class="up-item-login">
                                             <ul class="menu">
                                                 <li>
                                                     <i class="far fa-user"></i><a href="#"> {{ Auth::user()->name }} </a>
-                                                        <ul class="sub-menu">
-                                                            {{-- <li><a href="#"><i class="fas fa-user-edit"></i>Edit Profile</a></li> --}}
+                                                    <ul class="sub-menu">
+                                                        {{-- <li><a href="#"><i class="fas fa-user-edit"></i>Edit Profile</a></li> --}}
 
-                                                            <li><a href="{{ route('logout') }}" 
-                                                            onclick="event.preventDefault();
-                                                                document.getElementById('logout-form').submit();">
-                                                                <i class="fas fa-sign-out-alt"></i>Logout
-                                                            </a>
-                                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                                @csrf
-                                                            </form>
+                                                        <li><a href="{{ route('logout') }}" 
+                                                        onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();">
+                                                            <i class="fas fa-sign-out-alt"></i>Logout
+                                                        </a>
+                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                            @csrf
+                                                        </form>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -84,10 +90,9 @@
                                     
                                     <div class="right-item">
                                         <div class="shopping-card">
-                                            <i class="fas fa-shopping-bag"></i>
-                                        <span class="amount-icon">{{ Cart::content()->count() }}</span>
+                                            <a href="{{ route('cart.checkout') }}"><i class="fas fa-shopping-bag"></i></a></span>
+                                            <span class="amount-icon">{{ Cart::content()->count() }}</span>
                                         </div>
-                                        <span class="hidden-span"><a href="{{ route('cart.checkout') }}">Shopping Cart</a></span>
                                     </div>
                                 </div>
                             </div>
@@ -101,10 +106,10 @@
                         <!-- menu -->
                         <div id="nav_main" class="row d-flex justify-content-end">
                             <div class="search-nav d-hidden">
-                                <form class="header-search-form" method="post" enctype="multipart/form-data" action="index.php?page=shop">
-                                        <input type="text" name="search-data" placeholder="Search ...">
+                                <form class="header-search-form" method="get" action="{{route('search')}}">
+                                        <input type="search" name="search" placeholder="Search ...">
                                      
-                                        <button type="submit" name="search">
+                                        <button type="submit">
                                             <i class="fas fa-search"></i>
                                         </button>
                                     
@@ -118,6 +123,7 @@
                                         @foreach (App\Category::all() as $category)
                                         <li><a href="/shop/{{ $category->product_type_id }}/{{Str::slug($category->product_type_name)}}">{{ $category->product_type_name }}</a></li>
                                         @endforeach
+
                                 </ul>
                             </li>
                             <li><a href="/about">About</a></li>
@@ -180,7 +186,7 @@
                 <div class="container">
                     
     
-                    <p class="text-white text-center mt-3">Copyright &copy;<script>document.write(new Date().getFullYear());</script> This website is made by <i class="fa fa-heart-o" aria-hidden="true"></i> <a class="author-link" href="facebook.com/riin997/" target="_blank"><span class="author-name">Rin Nguyễn</span></a></p>
+                    <p class="text-white text-center mt-3">Copyright &copy;<script>document.write(new Date().getFullYear());</script> This website is made by <i class="fa fa-heart-o" aria-hidden="true"></i> <a class="author-link" href="facebook.com/riin997/" target="_blank"><span class="author-name">Nguyễn Huy Hoàng</span></a></p>
     
                 </div>
             </div>

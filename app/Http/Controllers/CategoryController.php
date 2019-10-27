@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 
 class CategoryController extends Controller
@@ -17,16 +18,40 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        if (request()->category) {
+            if (request()->sort=='L_H') {
+                $ctgs = DB::table('products')->where('product_type_id','=', request()->category)->orderBy('product_price','asc');
+            }elseif(request()->sort=='H_L') {
+                $ctgs = DB::table('products')->where('product_type_id','=', request()->category)->orderBy('product_price','desc');
+            }elseif(request()->name=='A_Z') {
+                $ctgs = DB::table('products')->where('product_type_id','=', request()->category)->orderBy('product_name','asc');
+            }elseif(request()->name=='Z_A') {
+                $ctgs = DB::table('products')->where('product_type_id','=', request()->category)->orderBy('product_name','desc');
+            }else{
+            $ctgs = DB::table('products')->where('product_type_id','=', request()->category);
+            }
+        }
+        else
+        {
+            if (request()->sort=='L_H') {
+                $ctgs = DB::table('products')->orderBy('product_price','asc');
+            }elseif(request()->sort=='H_L') {
+                $ctgs = DB::table('products')->orderBy('product_price','desc');
+            }elseif(request()->name=='A_Z') {
+                $ctgs = DB::table('products')->orderBy('product_name','asc');
+            }elseif(request()->name=='Z_A') {
+                $ctgs = DB::table('products')->orderBy('product_name','desc');
+            }else{
+                $ctgs = DB::table('products');
+            }
+        }
         
-        $ctg = Product::select('*')
-               ->orderBy('product_id', 'desc')
-               ->limit(9)
-               ->get();
-        return view('page.shop',compact(['ctg']));
+       $ctgs=$ctgs->paginate(6);
+        return view('page.shop',['ctgs'=>$ctgs]);
         //
 
     }
-
+    
     
     /**
      * Show the form for creating a new resource.
@@ -55,12 +80,8 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($category_id,$category_name)
+    public function show()
     {
-        $ctg = Product::where('product_type_id', $category_id)
-               ->orderBy('product_id', 'desc')
-               ->get();
-        return view('page.shop',compact(['ctg']));
     }
 
     /**

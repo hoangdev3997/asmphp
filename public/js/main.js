@@ -180,7 +180,8 @@ $(window).on('load', function() {
 	proQty.append('<span class="inc qtybtn">+</span>');
 	proQty.on('click', '.qtybtn', function () {
 		var $button = $(this);
-		var oldValue = $button.parent().find('input').val();
+		var oldValue = $button.parent().find('.qty').val();
+		
 		if ($button.hasClass('inc')) {
 			var newVal = parseFloat(oldValue) + 1;
 		} else {
@@ -191,7 +192,8 @@ $(window).on('load', function() {
 				newVal = 0;
 			}
 		}
-		$button.parent().find('input').val(newVal);
+		$button.parent().find('.qty').val(newVal);
+		$('.valueqty').val(newVal);
 	});
 
 

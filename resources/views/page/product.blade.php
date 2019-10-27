@@ -62,9 +62,20 @@
 
                         <div class="quantity">
                             <p>Quantity</p>
-                            <div class="pro-qty"><input type="text" value="1"></div>
+                            <div class="pro-qty"><input type="text" class="qty" value="1"></div>
                         </div>
-                        <a href="#" class="site-btn">BUY NOW</a>
+                        @php
+                            $price = $prd_by_id->product_price - $prd_by_id->product_sale*$prd_by_id->product_price/100;
+                        @endphp
+                            <form method="POST" action="{{route('cart.add')}}" class="" >
+                                @csrf
+                                <input name="id" type="hidden" value="{{$prd_by_id->product_id}}">
+                                <input name="name" type="hidden" value="{{$prd_by_id->product_name}}">
+                                <input name="amount" type="hidden" class="valueqty" value="1">
+                                <input name="price" type="hidden" value="{{$price}}">
+                                <input type="hidden" name="img" value="{{ Voyager::image( json_decode($prd_by_id->img)[0] ) }}">
+                                <button type="submit" class="site-btn">BUY NOW</button>
+                            </form>                                                
                         <div id="accordion" class="accordion-area">
                             <div class="panel">
                                 <div class="panel-header" id="headingOne">

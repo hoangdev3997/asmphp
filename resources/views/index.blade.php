@@ -11,7 +11,6 @@
 		<div class="loader"></div>
 	</div>
 
-
 	<!-- Hero section -->
 	<section class="hero-section">
 		<div class="hero-slider owl-carousel">
@@ -195,7 +194,18 @@
 							
 							<img src="{{ Voyager::image( json_decode($new_prd->img)[0] ) }}" alt="">
 							<div class="pi-links">
-								<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
+							@php
+								$price = $new_prd->product_price - $new_prd->product_sale*$new_prd->product_price/100;
+							@endphp
+								<form method="POST" action="{{route('cart.add')}}" class="" >
+									@csrf
+									<input name="id" type="hidden" value="{{$new_prd->product_id}}">
+									<input name="name" type="hidden" value="{{$new_prd->product_name}}">
+									<input name="amount" type="hidden" value="1">
+									<input name="price" type="hidden" value="{{$price}}">
+									<input type="hidden" name="img" value="{{ Voyager::image( json_decode($new_prd->img)[0] ) }}">
+									<button type="submit" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></button>
+								</form>                                                
 								<a href="/product/{{$new_prd->product_id}}/{{Str::slug($new_prd->product_name)}}" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
 							</div>
 						</div>
@@ -238,7 +248,18 @@
 								
 								<img src="{{ Voyager::image( json_decode($top_prd->img)[0] ) }}" alt="">
 								<div class="pi-links">
-									<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
+								@php
+									$price = $top_prd->product_price - $top_prd->product_sale*$top_prd->product_price/100;
+								@endphp
+									<form method="POST" action="{{route('cart.add')}}" class="" >
+										@csrf
+										<input name="id" type="hidden" value="{{$top_prd->product_id}}">
+										<input name="name" type="hidden" value="{{$top_prd->product_name}}">
+										<input name="amount" type="hidden" value="1">
+										<input name="price" type="hidden" value="{{$price}}">
+										<input type="hidden" name="img" value="{{ Voyager::image( json_decode($top_prd->img)[0] ) }}">
+										<button type="submit" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></button>
+									</form>                                                
 									<a href="/product/{{$top_prd->product_id}}/{{Str::slug($top_prd->product_name)}}" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
 								</div>
 							</div>
@@ -249,26 +270,6 @@
 						</div>
 					</div>
 					@endforeach
-
-				{{-- <div class="col-lg-3 col-sm-6">
-					<div class="product-item">
-						<div class="pi-pic">
-							<img src="{{asset('')}}img/product/12.jpg" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
-							</div>
-						</div>
-						<div class="pi-text">
-							<h6>$35,00</h6>
-							<p>Flamboyant Pink Top </p>
-						</div>
-					</div>
-				</div> --}}
-			</div>
-
-			<div class="text-center pt-5">
-				<button class="site-btn sb-line sb-dark">LOAD MORE</button>
 			</div>
 		</div>
 	</section>
@@ -282,7 +283,7 @@
 				<div class="tag-new">NEW</div>
 				<span>New Arrivals</span>
 				<h2>STRIPED SHIRTS</h2>
-				<a href="#" class="site-btn">SHOP NOW</a>
+				<a href="/shop" class="site-btn">SHOP NOW</a>
 			</div>
 		</div>
 	</section>

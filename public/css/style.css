@@ -74,7 +74,19 @@ ol {
 	padding: 0;
 	margin: 0;
 }
-
+.btn-primary {
+    color: #fff;
+    background-color: #f33;
+    border-color: #f33;
+}
+.btn-link {
+    font-weight: 400;
+    color: #000;
+}
+.btn-link:hover {
+    font-weight: 400;
+    color: #f33;
+}
 /*---------------------
   Helper CSS
 -----------------------*/
@@ -497,28 +509,6 @@ ol {
 	font-size: 14px;
 	color: #000;
 }
-.user-panel .right-item .hidden-span {
-	font-size: 1em;
-	text-transform: uppercase;
-	position: absolute;
-	opacity: 0;
-	display: none;
-	top: 0;
-}
-
-.user-panel .right-item:hover {
-	width: 140px;
-	text-align: left;
-}
-
-.user-panel .right-item:hover .hidden-span {
-	opacity: 1;
-	display: block;
-	top: 26%;
-	right: 5px;	
-	animation: traiqua 0.3s;
-	transition: all 0.3s ease-in-out;
-}
  
 .main-navbar {
 	background: #000;
@@ -604,6 +594,7 @@ ol {
 
 .menu li:hover>a {
 	color: #f33;
+	text-decoration: none;
 }
 
 .menu .sub-menu {
@@ -665,6 +656,7 @@ ol {
 
 .main-menu li:hover>a {
 	color: #f33;
+	text-decoration: none;
 }
 
 .main-menu .sub-menu {
@@ -2511,6 +2503,7 @@ ol {
 	padding-top: 80px;
 	padding-bottom: 0;
 	position: relative;
+	margin-bottom: 50px;
 }
 
 .contact-info h3 {
@@ -2759,6 +2752,9 @@ ol {
 	}
 	.user-panel {
 		text-align: center;
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
 	}
 	.main-menu {
 		text-align: center;
@@ -3063,3 +3059,31 @@ ol {
 }
 
 .cart-table-warp .remove a{color: #F33}
+
+
+.page-link {
+	color: #000 !important; 
+}
+.page-item.active .page-link{
+	background-color: #f33;
+    border-color: #f33;
+}
+.pagination {
+	justify-content: center;
+}
+
+.pr-thumb {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pr-thumb h6{
+	width: 25%;
+}
+
+button.update-cart {
+    background: none;
+    border: none;
+	cursor: pointer;
+	height: 50%;
+}

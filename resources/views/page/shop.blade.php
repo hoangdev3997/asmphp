@@ -5,6 +5,12 @@
 @section('content')
 
 @csrf
+    
+	@if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 	<!-- Category section -->
 	<section class="category-section spad">
             <div class="container">
@@ -14,7 +20,8 @@
                             <h2 class="fw-title">Categories</h2>
                             <ul class="category-menu">
                                 @foreach (App\Category::all() as $category)
-                                <li><a href="/shop/{{ $category->product_type_id }}/{{Str::slug($category->product_type_name)}}">{{ $category->product_type_name }}</a></li>
+                                <li><a href="{{route('shop',['category'=>$category->product_type_id])}}">{{ $category->product_type_name }}</a></li>
+                                {{-- {{ $category->product_type_id }}/{{Str::slug($category->product_type_name)}} --}}
                                 @endforeach
                             </ul>
                         </div>
@@ -37,12 +44,21 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="filter-widget">
+                            <h2 class="fw-title">Sorting</h2>
+                            <ul class="category-menu">
+                            <li><a href="{{route('shop',['category'=>request()->category,'sort'=>'L_H','page'=>request()->page])}}">Price Low to High</a></li>
+                                <li><a href="{{route('shop',['category'=>request()->category,'sort'=>'H_L','page'=>request()->page])}}">Price High to Low</a></li>
+                                <li><a href="{{route('shop',['category'=>request()->category,'name'=>'A_Z','page'=>request()->page])}}">Name A -> Z</a></li>
+                                <li><a href="{{route('shop',['category'=>request()->category,'name'=>'Z_A','page'=>request()->page])}}">Name Z -> A</a></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
                         <div class="row">
 
                            
-                            @foreach ($ctg as $ctg)
+                            @foreach ($ctgs as $ctg)
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
@@ -64,37 +80,30 @@
                                         
                                         <img src="{{ Voyager::image( json_decode($ctg->img)[0] ) }}" alt="">
                                         <div class="pi-links">
-                                            @php
-                                                $price = $ctg->product_price - $ctg->product_sale*$ctg->product_price/100;
-                                            @endphp
-                                                <form method="POST" action="{{route('cart.add')}}" class="" >
-                                                    @csrf
-                                                    <input name="id" type="hidden" value="{{$ctg->product_id}}">
-                                                    <input name="name" type="hidden" value="{{$ctg->product_name}}">
-                                                    <input name="amount" type="hidden" value="1">
-                                                    <input name="price" type="hidden" value="{{$price}}">
-                                                    <input type="hidden" name="img" value="{{ Voyager::image( json_decode($ctg->img)[0] ) }}">
-                                                    <button type="submit" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></button>
-                                                </form>
-                                
-                                                
-                                                <a href="/product/{{$ctg->product_id}}/{{Str::slug($ctg->product_name)}}" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
-
-
-                                            
+                                        @php
+                                            $price = $ctg->product_price - $ctg->product_sale*$ctg->product_price/100;
+                                        @endphp
+                                            <form method="POST" action="{{route('cart.add')}}" class="" >
+                                                @csrf
+                                                <input name="id" type="hidden" value="{{$ctg->product_id}}">
+                                                <input name="name" type="hidden" value="{{$ctg->product_name}}">
+                                                <input name="amount" type="hidden" value="1">
+                                                <input name="price" type="hidden" value="{{$price}}">
+                                                <input type="hidden" name="img" value="{{ Voyager::image( json_decode($ctg->img)[0] ) }}">
+                                                <button type="submit" class="add-card"><i class="fas fa-shopping-bag"></i><span>ADD TO CART</span></button>
+                                            </form>                                                
+                                            <a href="/product/{{$ctg->product_id}}/{{Str::slug($ctg->product_name)}}" class="wishlist-btn"><i class="far fa-eye"></i><span>VIEW MORE</span></a>
+                                        </div>
+                                        </div>
+                                        <div class="pi-text">
+                                            <h6>${{ $ctg->product_price - $ctg->product_sale*$ctg->product_price/100 }}</h6>
+                                            <p>{{$ctg->product_name}}</p>
                                         </div>
                                     </div>
-                                    <div class="pi-text">
-                                        <h6>${{ $ctg->product_price - $ctg->product_sale*$ctg->product_price/100 }}</h6>
-                                        <p>{{$ctg->product_name}}</p>
-                                    </div>
                                 </div>
-                            </div>
-                            @endforeach
+                                @endforeach
                             <div class="text-center w-100 pt-3">
-                                    <div id="load_more">
-                                        <button type="button" name="load_more_button" class="site-btn sb-line sb-dark" id="load_more_button">Load More</button>
-                                    </div>                                
+                                    {{ $ctgs->appends(request()->input())->links() }}                              
                             </div>
                         </div>
                         
