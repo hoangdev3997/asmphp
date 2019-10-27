@@ -43,7 +43,10 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
+<<<<<<< HEAD
 @lang('Thanks you,'),<br>
+=======
+@lang('Alo'),<br>
 {{ config('app.name') }}
 @endif
 
