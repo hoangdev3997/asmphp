@@ -50,7 +50,7 @@ class CartController extends Controller
                 'city'=> $request->city,
                 'zipcode' => $request->zip,
                 'phone'=> $request->phone,
-                'total' => Cart::total(0),
+                'total' =>Cart::total(0),
             ]);
             foreach(Cart::content() as $item){
                 OrderItem::create([

@@ -44,7 +44,7 @@
                                         
                                             <div class="pc-title">
                                                 <h4>{{$item->name}}</h4>
-                                                <p>${{$item->price}}</p>
+                                                <p>${{number_format($item->price,0)}}</p>
                                             </div>
                                         </td>
                                         <td class="quy-col">

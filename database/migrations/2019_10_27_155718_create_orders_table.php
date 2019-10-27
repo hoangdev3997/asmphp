@@ -25,7 +25,7 @@ class CreateOrdersTable extends Migration
             $table->string('zipcode',50);
             $table->string('phone',20);
             $table->boolean('status')->default('0');
-            $table->Integer('total');
+            $table->string('total');
             $table->timestamps();
         });
     }
