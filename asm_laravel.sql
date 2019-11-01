@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 31, 2019 lúc 10:57 AM
+-- Thời gian đã tạo: Th10 01, 2019 lúc 06:26 AM
 -- Phiên bản máy phục vụ: 10.4.6-MariaDB
 -- Phiên bản PHP: 7.3.9
 
@@ -322,7 +322,8 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `user_id`, `name`, `address_1`, `address_2`, `city`, `zipcode`, `phone`, `status`, `total`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Nguyen Huy Hoang', 'Thu Duc', NULL, 'Ho Chi Minh', '65081', '0965960207', 0, '2,256', '2019-10-27 11:27:34', '2019-10-27 11:27:34'),
-(2, 1, 'Fingle Man', '232 Dong Nai Street', NULL, 'Ha Noi', '730000', '0965960207', 0, '122', '2019-10-27 18:50:50', '2019-10-27 18:50:50');
+(2, 1, 'Fingle Man', '232 Dong Nai Street', NULL, 'Ha Noi', '730000', '0965960207', 0, '122', '2019-10-27 18:50:50', '2019-10-27 18:50:50'),
+(3, 4, 'Nguyen Huy Hoang', 'Thu Duc', NULL, 'Ho Chi Minh', '7658678', '0965960207', 0, '632', '2019-10-31 22:24:32', '2019-10-31 22:24:32');
 
 -- --------------------------------------------------------
 
@@ -345,7 +346,8 @@ CREATE TABLE `order_items` (
 
 INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `qty`, `created_at`, `updated_at`) VALUES
 (1, 1, 6, 4, '2019-10-27 11:27:34', '2019-10-27 11:27:34'),
-(2, 2, 5, 1, '2019-10-27 18:50:50', '2019-10-27 18:50:50');
+(2, 2, 5, 1, '2019-10-27 18:50:50', '2019-10-27 18:50:50'),
+(3, 3, 9, 6, '2019-10-31 22:24:32', '2019-10-31 22:24:32');
 
 -- --------------------------------------------------------
 
@@ -542,15 +544,15 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`product_id`, `product_name`, `product_price`, `product_sale`, `full_detail`, `amount`, `check_new`, `check_hot`, `created_at`, `updated_at`, `product_type_id`, `img`) VALUES
 (1, 'Demo', 20, 20, '<p>asdasdasd</p>', 120, 1, 1, '2019-10-11 04:33:38', '2019-10-11 04:33:38', 1, '[\"products\\\\October2019\\\\qonEKbH5fSV3INJeh79W.jpg\"]'),
-(2, 'Demo Multi Image', 52, 12, '<p>Nothing here</p>', -1, 1, 0, '2019-10-15 04:49:55', '2019-10-27 10:19:07', 2, '[\"products\\\\October2019\\\\HooMKJVaeaWfr4rghyss.jpg\",\"products\\\\October2019\\\\zpNxGHDsjn7T1HugFE3X.jpg\",\"products\\\\October2019\\\\Bj3OURzrzFP7fAycTflk.jpg\"]'),
-(3, 'PAUL MASSION 20 YEAR', 564, 12, '<p>Nothing Here</p>', -5, 1, 0, '2019-10-15 06:28:44', '2019-10-27 11:19:18', 4, '[\"products\\\\October2019\\\\qDZqB9zQUzRoWRJTfFbW.jpg\"]'),
+(2, 'Demo Multi Image', 52, 12, '<p>Nothing here</p>', 5000, 1, 0, '2019-10-15 04:49:55', '2019-10-27 10:19:07', 2, '[\"products\\\\October2019\\\\HooMKJVaeaWfr4rghyss.jpg\",\"products\\\\October2019\\\\zpNxGHDsjn7T1HugFE3X.jpg\",\"products\\\\October2019\\\\Bj3OURzrzFP7fAycTflk.jpg\"]'),
+(3, 'PAUL MASSION 20 YEAR', 564, 12, '<p>Nothing Here</p>', 40404, 1, 0, '2019-10-15 06:28:44', '2019-10-27 11:19:18', 4, '[\"products\\\\October2019\\\\qDZqB9zQUzRoWRJTfFbW.jpg\"]'),
 (4, 'Tam Dao Wine', 345, 33, '<p>Nothing</p>', 45, 0, 0, '2019-10-15 06:29:39', '2019-10-15 06:29:39', 3, '[\"products\\\\October2019\\\\qMqr3sV87o6l4NzKNDAU.jpg\"]'),
-(5, 'Da Lat Wine 3 Year', 221, 45, '<p>Something</p>', -1, 1, 0, '2019-10-15 06:30:12', '2019-10-27 18:50:50', 5, '[\"products\\\\October2019\\\\Rz8tAwpRsm9FW9vbeYeW.jpg\"]'),
-(6, 'Tam Dao Wine 6 Year', 564, NULL, '<p>Something</p>', -4, 1, 1, '2019-10-15 06:30:55', '2019-10-27 11:20:13', 3, '[\"products\\\\October2019\\\\ZLXkwhdBNAw8NYVCSe3q.jpg\"]'),
+(5, 'Da Lat Wine 3 Year', 221, 45, '<p>Something</p>', 4000, 1, 0, '2019-10-15 06:30:12', '2019-10-27 18:50:50', 5, '[\"products\\\\October2019\\\\Rz8tAwpRsm9FW9vbeYeW.jpg\"]'),
+(6, 'Tam Dao Wine 6 Year', 564, NULL, '<p>Something</p>', 9999, 1, 1, '2019-10-15 06:30:55', '2019-10-27 11:20:13', 3, '[\"products\\\\October2019\\\\ZLXkwhdBNAw8NYVCSe3q.jpg\"]'),
 (7, 'PaPaLe 6 Year', 124, 43, '<p>Something</p>', 24, 1, 1, '2019-10-15 06:31:31', '2019-10-15 06:31:31', 2, '[\"products\\\\October2019\\\\GrAwjRbyIJtvxSMHsndt.jpg\"]'),
 (8, 'Passion 5 Year', 342, 23, '<p>Something here</p>', 1, 0, 0, '2019-10-15 06:32:03', '2019-10-15 06:32:03', 2, '[\"products\\\\October2019\\\\jZhxwWmsfQh08tkPPWgy.jpg\"]'),
-(9, 'Napa Valley 9 Year', 234, 55, '<p>Something</p>', NULL, 0, 0, '2019-10-15 06:35:22', '2019-10-15 06:35:22', 3, '[\"products\\\\October2019\\\\4CGyBnnGt70vXxFfQxZd.jpg\"]'),
-(10, 'Gahors 14 Year', 1233, 12, '<p>Something</p>', -1, 1, 1, '2019-10-15 06:37:24', '2019-10-27 11:21:19', 4, '[\"products\\\\October2019\\\\Si4m9iMRc7P55WKPUs5m.jpg\"]'),
+(9, 'Napa Valley 9 Year', 234, 55, '<p>Something</p>', 0, 0, 0, '2019-10-15 06:35:22', '2019-10-31 22:24:33', 3, '[\"products\\\\October2019\\\\4CGyBnnGt70vXxFfQxZd.jpg\"]'),
+(10, 'Gahors 14 Year', 1233, 12, '<p>Something</p>', 99999, 1, 1, '2019-10-15 06:37:24', '2019-10-27 11:21:19', 4, '[\"products\\\\October2019\\\\Si4m9iMRc7P55WKPUs5m.jpg\"]'),
 (11, 'Finger 17 Year', 233, 44, '<p>Something</p>', 234, 0, 0, '2019-10-15 06:37:57', '2019-10-15 06:37:57', 5, '[\"products\\\\October2019\\\\8xEtwyD8PhWa4Q7WJTqq.jpg\"]');
 
 -- --------------------------------------------------------
@@ -847,13 +849,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `permissions`
