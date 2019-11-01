@@ -56,7 +56,7 @@
                                         </td>
                                         <td class="total-col"><h4>${{$item->qty*$item->price}}</h4></td>
                                         <td class="remove">
-                                        <a href="/cart-remove/{{$item->rowId}}"><i class="fas fa-trash"></i></a>
+                                            <a href="/cart-remove/{{$item->rowId}}"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
