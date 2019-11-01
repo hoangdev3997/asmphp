@@ -88,10 +88,11 @@
                                     
                                     <div class="right-item">
                                         <div class="shopping-card">
-                                            <i class="fas fa-shopping-bag"></i>
-                                        <span class="amount-icon">{{ Cart::content()->count() }}</span>
+                                            <a href="{{ route('cart.checkout') }}">
+                                                    <i class="fas fa-shopping-bag"></i>
+                                                    <span class="amount-icon">{{ Cart::content()->count() }}</span>
+                                            </a>                                            
                                         </div>
-                                        <span class="hidden-span"><a href="{{ route('cart.checkout') }}">Shopping Cart</a></span>
                                     </div>
                                 </div>
                             </div>
